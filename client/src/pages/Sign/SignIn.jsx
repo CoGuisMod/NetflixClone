@@ -7,7 +7,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { signIn } = UserAuth();
+  const { logIn } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const SignIn = () => {
     e.preventDefault();
     setError("");
     try {
-      await signIn(email, password);
+      await logIn(email, password);
       navigate("/browse");
     } catch (e) {
       setError(e.message);
@@ -28,6 +28,7 @@ const SignIn = () => {
       <div className="flex flex-col justify-center items-center gap-4 bg-neutral-900/50 w-full h-full">
         <div className="bg-black/75 rounded w-full max-w-md px-16 py-12">
           <h1 className="font-bold text-4xl">Sign In</h1>
+          {error && <span className="text-red-500">{error}</span>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
             <input
               type="email"

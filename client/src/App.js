@@ -7,6 +7,7 @@ import Browse from "./pages/Browse/Browse";
 import Home from "./pages/Home/Home";
 import SignIn from "./pages/Sign/SignIn";
 import SignUp from "./pages/Sign/SignUp";
+import Account from "./pages/Account/Account";
 
 function App() {
   return (
@@ -22,13 +23,35 @@ function App() {
               </LoggedIn>
             }
           />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/signin"
+            element={
+              <LoggedIn>
+                <SignIn />
+              </LoggedIn>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <LoggedIn>
+                <SignUp />
+              </LoggedIn>
+            }
+          />
           <Route
             path="/browse"
             element={
               <NoLoggedIn>
                 <Browse />
+              </NoLoggedIn>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <NoLoggedIn>
+                <Account />
               </NoLoggedIn>
             }
           />
