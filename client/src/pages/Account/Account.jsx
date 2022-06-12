@@ -1,21 +1,20 @@
 import React from "react";
+import { UserAuth } from "../../context/AuthContext";
 import BookmarkedMovies from "../../components/BookmarkedMovies/BookmarkedMovies";
 
 const Account = () => {
+  const { user } = UserAuth();
+
   return (
     <>
-      <div className="w-full text-white">
-        <img
-          className="w-full h-[400px] object-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/US-en-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="/"
-        />
-        <div className="bg-black/60 fixed top-0 left-0 w-full h-[550px]"></div>
-        <div className="absolute top-[20%] p-4 md:p-8">
-          <h1 className="text-3xl md:text-5xl font-bold">My Shows</h1>
+      <section className="bg-hero-image bg-center bg-cover text-white h-[75vh]">
+        <div className="flex items-center bg-neutral-900/50 w-full h-full p-4 md:p-8">
+          <h1 className="font-bold text-3xl md:text-5xl">{user?.email}</h1>
         </div>
-      </div>
-      <BookmarkedMovies />
+      </section>
+      <section className="bg-neutral-900">
+        <BookmarkedMovies />
+      </section>
     </>
   );
 };

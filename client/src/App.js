@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header/Header";
-import NoLoggedIn from "./components/ProtectedRoutes/NoLoggedIn";
-import LoggedIn from "./components/ProtectedRoutes/LoggedIn";
 import { AuthContextProvider } from "./context/AuthContext";
-import Browse from "./pages/Browse/Browse";
+import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
-import SignIn from "./pages/Sign/SignIn";
-import SignUp from "./pages/Sign/SignUp";
+import LogIn from "./pages/AuthForm/LogIn";
+import SignUp from "./pages/AuthForm/SignUp";
+import Browse from "./pages/Browse/Browse";
 import Account from "./pages/Account/Account";
+import LoggedIn from "./components/ProtectedRoutes/LoggedIn";
+import NoLoggedIn from "./components/ProtectedRoutes/NoLoggedIn";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -24,10 +25,10 @@ function App() {
             }
           />
           <Route
-            path="/signin"
+            path="/login"
             element={
               <LoggedIn>
-                <SignIn />
+                <LogIn />
               </LoggedIn>
             }
           />
@@ -56,6 +57,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </AuthContextProvider>
     </Router>
   );

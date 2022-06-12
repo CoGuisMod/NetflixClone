@@ -13,20 +13,20 @@ const AuthContext = createContext();
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
-  async function signUp(email, password) {
+  const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(firebaseAuth, email, password);
     setDoc(doc(firebaseFirestore, "users", email), {
       bookmarks: [],
     });
-  }
+  };
 
-  function logIn(email, password) {
-    return signInWithEmailAndPassword(firebaseAuth, email, password);
-  }
+  const logIn = async (email, password) => {
+    await signInWithEmailAndPassword(firebaseAuth, email, password);
+  };
 
-  function logOut() {
-    return signOut(firebaseAuth);
-  }
+  const logOut = async () => {
+    await signOut(firebaseAuth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {

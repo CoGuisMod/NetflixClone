@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import requests from "../../Request";
 import axios from "axios";
-import Hero from "../../components/Hero/Hero";
-import Row from "../../components/Row/Row";
+import BrowseHero from "../../components/Hero/BrowseHero";
+import MoviesSlider from "../../components/MoviesSlider/MoviesSlider";
 
 const Browse = () => {
   const [movies, setMovies] = useState([]);
@@ -15,33 +15,31 @@ const Browse = () => {
     });
   }, []);
 
-  console.log(movie, "movies hero");
-
   return (
     <div className="bg-neutral-900 text-white">
-      <Hero
+      <BrowseHero
         movieTitle={movie?.title}
         movieOverview={movie?.overview}
         movieImage={movie?.backdrop_path}
       />
-      <Row
-        rowID="rowOne"
-        rowTitle="Upcoming"
+      <MoviesSlider
+        msID="msOne"
+        msTitle="Upcoming"
         fetchURL={requests.requestUpcoming}
       />
-      <Row
-        rowID="rowTwo"
-        rowTitle="Trending this week"
+      <MoviesSlider
+        msID="msRowTwo"
+        msTitle="Trending this week"
         fetchURL={requests.requestTrending}
       />
-      <Row
-        rowID="rowThree"
-        rowTitle="Top Rated"
+      <MoviesSlider
+        msID="msThree"
+        msTitle="Top Rated"
         fetchURL={requests.requestTopRated}
       />
-      <Row
-        rowID="rowFour"
-        rowTitle="Horror Movies"
+      <MoviesSlider
+        msID="msFour"
+        msTitle="Horror Movies"
         fetchURL={requests.requestHorror}
       />
     </div>

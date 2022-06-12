@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 
-const SignIn = () => {
+const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +27,7 @@ const SignIn = () => {
     <section className="bg-hero-image bg-center bg-cover text-white h-screen">
       <div className="flex flex-col justify-center items-center gap-4 bg-neutral-900/50 w-full h-full">
         <div className="bg-black/75 rounded w-full max-w-md px-16 py-12">
-          <h1 className="font-bold text-4xl">Sign In</h1>
+          <h1 className="font-bold text-4xl">Log In</h1>
           {error && <span className="text-red-500">{error}</span>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
             <input
@@ -43,7 +43,7 @@ const SignIn = () => {
               className="bg-neutral-700 rounded text-lg px-2 py-1"
             />
             <button className="bg-red-600 rounded font-medium text-xl mt-4 px-2 py-1">
-              Sign In
+              Log In
             </button>
           </form>
           <h2 className="text-white/75 mt-4">
@@ -59,4 +59,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LogIn;

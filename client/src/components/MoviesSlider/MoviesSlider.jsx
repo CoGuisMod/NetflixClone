@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import requests from "../../Request";
-import {
-  FaBookmark,
-  FaRegBookmark,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
-import { UserAuth } from "../../context/AuthContext";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import MovieCard from "../MovieCard/MovieCard";
 
-import { firebaseFirestore } from "../../firebase/config";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import Movie from "../Movie/Movie";
-
-const Row = ({ rowID, rowTitle, fetchURL }) => {
-  const { user } = UserAuth();
+const MoviesSlider = ({ msID, msTitle, fetchURL }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -23,32 +12,30 @@ const Row = ({ rowID, rowTitle, fetchURL }) => {
     });
   }, []);
 
-  console.log(movies, "movies row");
-
   const slideLeft = () => {
-    var slider = document.getElementById(rowID);
+    var slider = document.getElementById(msID);
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
   const slideRight = () => {
-    var slider = document.getElementById(rowID);
+    var slider = document.getElementById(msID);
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <h2 className="font-bold text-2xl">{rowTitle}</h2>
+    <div className="max-w-7xl mx-auto mt-8 px-4">
+      <h2 className="font-bold text-2xl">{msTitle}</h2>
       <div className="relative group mt-4">
         <FaChevronLeft
           onClick={slideLeft}
           className="cursor-pointer absolute left-2 top-1/2 bg-white rounded-full text-black text-4xl z-10 p-2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out"
         />
         <div
-          id={rowID}
-          className="w-full h-full whitespace-nowrap space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
+          id={msID}
+          className="w-full h-full pl-10 whitespace-nowrap space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
         >
           {movies.map((movie, id) => (
-            <Movie key={id} movie={movie} />
+            <MovieCard key={id} movie={movie} />
           ))}
         </div>
         <FaChevronRight
@@ -60,4 +47,4 @@ const Row = ({ rowID, rowTitle, fetchURL }) => {
   );
 };
 
-export default Row;
+export default MoviesSlider;

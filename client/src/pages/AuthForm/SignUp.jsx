@@ -62,7 +62,7 @@ const SignUp = () => {
           <h2 className="text-white/75 mt-4">
             Already have an account?{" "}
             <Link to="/signin" className="text-white">
-              Sign in
+              Log in
             </Link>
             .
           </h2>

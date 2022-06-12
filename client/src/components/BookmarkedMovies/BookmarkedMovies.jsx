@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { UserAuth } from "../../context/AuthContext";
 import { firebaseFirestore } from "../../firebase/config";
 import { updateDoc, doc, onSnapshot } from "firebase/firestore";
-import { AiOutlineClose } from "react-icons/ai";
+import { FaChevronLeft, FaChevronRight, FaPlus } from "react-icons/fa";
 
 const BookmarkedMovies = () => {
-  const [movies, setMovies] = useState([]);
   const { user } = UserAuth();
+
+  const [movies, setMovies] = useState([]);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft - 500;
   };
+
   const slideRight = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft + 500;
@@ -25,9 +26,10 @@ const BookmarkedMovies = () => {
   }, [user?.email]);
 
   const movieRef = doc(firebaseFirestore, "users", `${user?.email}`);
-  const deleteShow = async (passedID) => {
+
+  const unBookmark = async (passedID) => {
     try {
-      const result = movies.filter((item) => item.id !== passedID);
+      const result = movies.filter((movie) => movie.id !== passedID);
       await updateDoc(movieRef, {
         bookmarks: result,
       });
@@ -37,46 +39,41 @@ const BookmarkedMovies = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-white font-bold md:text-xl p-4">My Shows</h2>
-      <div className="relative flex items-center group">
-        <MdChevronLeft
+    <div className="max-w-7xl mx-auto mt-8 px-4">
+      <h2 className="font-bold text-white text-2xl">My Bookmarks</h2>
+      <div className="relative group mt-4">
+        <FaChevronLeft
           onClick={slideLeft}
-          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
+          className="cursor-pointer absolute left-2 top-1/2 bg-white rounded-full text-black text-4xl z-10 p-2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out"
         />
         <div
           id={"slider"}
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+          className="w-full h-full pl-10 whitespace-nowrap space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
         >
-          {movies.map((item) => (
+          {movies.map((movie) => (
             <div
-              key={item.id}
-              className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2"
+              key={movie.id}
+              className="cursor-pointer relative rounded text-white w-40 md:w-64 inline-block overflow-hidden"
             >
               <img
-                className="w-full h-auto block"
-                src={`https://image.tmdb.org/t/p/w500/${item?.img}`}
-                alt={item?.title}
+                src={`https://image.tmdb.org/t/p/w500${movie.image}`}
+                alt={movie.title}
               />
-              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
-                <p className="white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center">
-                  {item?.title}
-                </p>
-                <p
-                  onClick={() => deleteShow(item.id)}
-                  className="absolute text-gray-300 top-4 right-4"
+              <div className="absolute left-0 top-0 flex justify-center items-center bg-black/50 font-bold text-xl text-center w-full h-full px-4 opacity-0 hover:opacity-100 transition-opacity duration-200 ease-in-out">
+                <div
+                  onClick={() => unBookmark(movie.id)}
+                  className="absolute right-2 top-2"
                 >
-                  <AiOutlineClose />
-                </p>
+                  <FaPlus className="rotate-45" />
+                </div>
+                <h3 className="whitespace-normal w-full">{movie.title}</h3>
               </div>
             </div>
           ))}
         </div>
-        <MdChevronRight
+        <FaChevronRight
           onClick={slideRight}
-          className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
+          className="cursor-pointer absolute right-2 top-1/2 bg-white rounded-full text-black text-4xl z-10 p-2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out"
         />
       </div>
     </div>

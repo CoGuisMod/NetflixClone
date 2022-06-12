@@ -1,7 +1,7 @@
 import React from "react";
 import { FaRegBookmark, FaPlay } from "react-icons/fa";
 
-const Hero = ({ movieTitle, movieOverview, movieImage }) => {
+const BrowseHero = ({ movieTitle, movieOverview, movieImage }) => {
   const truncateString = (str, num) => {
     if (str?.length > num) {
       return str.slice(0, num) + "...";
@@ -37,4 +37,4 @@ const Hero = ({ movieTitle, movieOverview, movieImage }) => {
   );
 };
 
-export default Hero;
+export default BrowseHero;

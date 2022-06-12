@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/logo.png";
 import { UserAuth } from "../../context/AuthContext";
+import Logo from "../../assets/logo.png";
 import { FaUserAlt } from "react-icons/fa";
 
 const Header = () => {
@@ -39,8 +39,8 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <Link to="/signin" className="font-medium">
-                Sign In
+              <Link to="/login" className="font-medium">
+                Log In
               </Link>
               <Link
                 to="/signup"
